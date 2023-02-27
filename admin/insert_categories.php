@@ -1,3 +1,29 @@
+<?php
+
+include '../includes/connect.php';
+
+if (isset($_POST['insert_cat'])) {
+     $category_title = $_POST['cat_title'];
+
+    //check if data already exist
+    $sql = "SELECT * FROM categories WHERE category_title = '$category_title'";
+    $result = mysqli_query($con, $sql);
+    $rows = mysqli_num_rows($result);
+
+    if ($rows > 0) {
+        echo "<script>alert('This category is present in the database')</script>";
+    }else{
+         //insert into database
+        $sql= "INSERT INTO categories (category_title) VALUES ('$category_title')";
+        $result = mysqli_query($con, $sql);
+        echo "<script>alert('Category has been inserted successfully')</script>";
+
+     }
+}
+
+?>
+
+
 <form action="" method="POST" class="mb-2">
     <div class="input-group w-99 mb-2">
         <span class="input-group-text bg-info" id="basic-addon1"><i class="fa-solid fa-receipt"></i></span>
