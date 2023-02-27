@@ -68,12 +68,14 @@
   <p class="text-center">Communications is at the heart of e-commerce and community</p>
 </div>
 
+
+<div class="container-fluid">
 <div class="row mb-2">
 <div class="col-md-10">
   <!-- products -->
   <div class="row">
-  <div class="col-md-4 mb-2">
-    <div class="card" style="width: 18rem;">
+  <div class="col-md-4">
+    <div class="card">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Card title</h5>
@@ -85,7 +87,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Card title</h5>
@@ -96,7 +98,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Card title</h5>
@@ -105,28 +107,59 @@
     </div>
     </div>
   </div>
-
-  </div>
-</div>
-
-
-  <div class="col-md-2">
   
+
   </div>
 </div>
 
 
+  <div class="col-md-2 bg-secondary p-0">
+    <!-- brands to be displayed -->
+    <ul class="navbar-nav me-auto text-center">
+      <li class="nav-item bg-info">
+        <a href="#" class="nav-link text-light"> <h4> Delivery brands</h4></a>
+      </li>
+       <li class="nav-item">
+        <a href="#" class="nav-link text-light">Brand 1</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-light">Brand 1</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-light">Brand 1</a>
+      </li>
+    </ul>
 
-<!-- <div class="bg-info p-3 text-center">
-    <p>All right reserved &copy; Developed by Muhammmad </p>
-</div> -->
+    <!-- categories to be displayed -->
+    <ul class="navbar-nav me-auto text-center">
+      <li class="nav-item bg-info">
+        <a href="#" class="nav-link text-light"> <h4> Categories</h4></a>
+      </li>
+       <li class="nav-item">
+        <a href="#" class="nav-link text-light">Brand 1</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-light">Brand 1</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-light">Brand 1</a>
+      </li>
+    </ul>
 
-    </div>
-
+  </div>
+</div>
+</div>
 
 
 
 <!-- footer -->
+  <div class="bg-info p-3 text-center">
+      <p>All right reserved &copy; Developed by Muhammmad </p>
+  </div>
+
+</div>
+
+
 
 
 
