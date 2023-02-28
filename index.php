@@ -17,13 +17,6 @@ require 'includes/connect.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
-<style>
-   .footer{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-</style>
 <body>
     <!-- navbar -->
     <div class="container-fluid p-0">
@@ -83,44 +76,52 @@ require 'includes/connect.php';
 
 
 <div class="container-fluid">
+
 <div class="row mb-2">
 <div class="col-md-10">
-  <!-- products -->
-  <div class="row">
-  <div class="col-md-4">
-    <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Add to cart</a>
-      <a href="#" class="btn btn-secondary">View more</a>
-    </div>
-  </div>
-  </div>
+    <!-- products row -->
 
-  <div class="col-md-4">
-    <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-  </div>
+    <div class='row'>
 
-  <div class="col-md-4">
-    <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    <?php
+
+//fetcging products
+
+$sql = "SELECT * FROM products ORDER  BY RAND()";
+$result = mysqli_query($con, $sql);
+
+
+while ($row = mysqli_fetch_assoc($result)) {
+  $product_id = $row['product_id'];
+  $product_title = $row['product_title'];
+  $product_description = $row['product_description'];
+  $product_keywords = $row['product_keywords'];
+  $category_id = $row['category_id'];
+  $brand_id = $row['brand_id'];
+  $product_image1 = $row['product_image1'];
+  $product_price = $row['product_price'];
+
+  echo "
+
+    <div class='col-md-4 mb-2'>
+      <div class='card'>
+      <img src='admin/product_images/$product_image1' class='card-img-top' alt='...'>
+      <div class='card-body'>
+        <h5 class='card-title'>$product_title</h5>
+        <p class='card-text'>$product_description.</p>
+        <a href='#' class='btn btn-primary'>Add to cart</a>
+        <a href='#' class='btn btn-secondary'>View more</a>
+      </div>
     </div>
-    </div>
-  </div>
-  
+    </div> 
+         
+  ";
+
+}
+
+
+?>    
+  <!-- products row ends -->
 
   </div>
 </div>
@@ -204,3 +205,4 @@ require 'includes/connect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
+
