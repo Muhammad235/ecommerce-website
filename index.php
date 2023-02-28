@@ -1,6 +1,6 @@
 <?php
 
-include 'includes/connect.php';
+require 'includes/connect.php';
 
 
 ?>
@@ -171,11 +171,13 @@ include 'includes/connect.php';
 
             echo "
             <li class='nav-item'>
-            <a href='index.php?brand=$category_id' class='nav-link text-light'>$category_title</a>
+            <a href='index.php?category=$category_id' class='nav-link text-light'>$category_title</a>
             </li>
             ";
           }
 
+        }else {
+          die(mysqli_query_error());
         }
 
     ?>
