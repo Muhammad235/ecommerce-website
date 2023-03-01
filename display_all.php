@@ -88,8 +88,8 @@ require 'search_product.php';
     <div class='row'>
         <?php
 
-        //displaying general products randomly limited to 2 products
-        getProducts();
+        //displaying all products randomly
+        getAllProducts();
 
         //displaying a particular category products randomly
          get_unique_categories();
@@ -138,8 +138,17 @@ require 'search_product.php';
 </div>
 
 
-<!-- include footer -->
-<?php include 'includes/footer.php'; ?>
+
+<!-- footer -->
+  <div class="bg-info p-3 text-center footer">
+      <p>All right reserved &copy; Developed by Muhammmad </p>
+  </div>
+
+</div>
+
+
+
+
 
     <!-- bootstrap js link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
