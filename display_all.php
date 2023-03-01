@@ -4,7 +4,7 @@ require 'includes/connect.php';
 
 require 'function/functions.php';
 
-require 'search_product.php';
+//require 'search_product.php';
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ require 'search_product.php';
           <a class="nav-link" href="#">Total price: 100</a>
         </li>
       </ul>
-      <form class="d-flex" role="search" m>
+      <form class="d-flex" role="search" action="">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
         <!-- <button class="btn btn-outline-light" type="submit">Search</button> -->
         <input type="submit" value="search" class="btn btn-outline-light" name="search_product">
@@ -88,17 +88,23 @@ require 'search_product.php';
     <div class='row'>
         <?php
 
+        
         //displaying all products randomly
         getAllProducts();
 
+       
         //displaying a particular category products randomly
          get_unique_categories();
 
         //displaying a particular brand products randomly
          get_unique_brands();
 
-        //displaying searched product
          search_product();
+         
+
+
+
+        //displaying searched product
 
         ?>
      <!-- products row ends -->
