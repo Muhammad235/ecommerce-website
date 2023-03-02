@@ -38,9 +38,9 @@ function getProducts(){
                   <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description.</p>
-                    <a href='#' class='btn btn-primary'>Add to cart</a>
-                    <a href='#' class='btn btn-secondary'>View more</a>
-                  </div>
+                    <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                    <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
+                    </div>
                 </div>
                 </div> 
                      
@@ -93,8 +93,8 @@ if (!isset($_GET['category'])) {
               <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_description.</p>
-                <a href='#' class='btn btn-primary'>Add to cart</a>
-                <a href='#' class='btn btn-secondary'>View more</a>
+                <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
               </div>
             </div>
             </div> 
@@ -149,8 +149,8 @@ function get_unique_categories(){
                   <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description.</p>
-                    <a href='#' class='btn btn-primary'>Add to cart</a>
-                    <a href='#' class='btn btn-secondary'>View more</a>
+                    <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                    <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a> 
                   </div>
                 </div>
                 </div> 
@@ -204,8 +204,8 @@ function get_unique_brands(){
                   <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description.</p>
-                    <a href='#' class='btn btn-primary'>Add to cart</a>
-                    <a href='#' class='btn btn-secondary'>View more</a>
+                    <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                    <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>                   
                   </div>
                 </div>
                 </div> 
@@ -305,8 +305,8 @@ function search_product(){
                 <div class='card-body'>
                   <h5 class='card-title'>$product_title</h5>
                   <p class='card-text'>$product_description.</p>
-                  <a href='#' class='btn btn-primary'>Add to cart</a>
-                  <a href='#' class='btn btn-secondary'>View more</a>
+                  <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                  <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
                 </div>
               </div>
               </div> 
@@ -321,6 +321,138 @@ function search_product(){
 }
 
 
+//view more details
+
+function view_details(){
+  global $con;
+
+  if (isset($_GET['product_id'])) {
+
+      //condition to check isset or not
+     if (!isset($_GET['category'])) {
+        if (!isset($_GET['brand'])) {
+           if (!isset($_GET['search_product'])) {
+
+
+          $product_id = $_GET['product_id'];
+          
+      
+           $sql = "SELECT * FROM products WHERE product_id = $product_id";
+           $result = mysqli_query($con, $sql);
+        
+          while ($row = mysqli_fetch_assoc($result)) {
+             $product_id = $row['product_id'];
+             $product_title = $row['product_title'];
+             $product_description = $row['product_description'];
+             $product_keywords = $row['product_keywords'];
+             $category_id = $row['category_id'];
+             $brand_id = $row['brand_id'];
+             $product_image1 = $row['product_image1'];
+             $product_image2 = $row['product_image2'];
+             $product_image3 = $row['product_image3'];
+             $product_price = $row['product_price'];
+        
+              echo "
+            
+                  <div class='col-md-4'>
+                  <div class='card'>
+                      <img src='admin/product_images/$product_image1' class='card-img-top' alt='...'>
+                      <div class='card-body'>
+                         <h5 class='card-title'>$product_title</h5>
+                          <p class='card-text'>$product_description.</p>
+                          <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                          
+                      </div>
+                  </div>
+              </div>
+              <div class='col-md-8'>
+              <div class='row'>
+                  <div class='md-12'>
+                      <h4 class='text-center text-info mb-5'>Related products</h4>
+                  </div>
+
+                    <div class='col-md-6'>
+                    <img src='admin/product_images/$product_image2' class='card-img-top' alt='...'>
+                    </div>
+                    <div class='col-md-6'>
+                    <img src='admin/product_images/$product_image3' class='card-img-top' alt='...'>
+                    </div>
+              </div>
+              
+          </div>
+                    
+              ";
+            
+           } // while statement ends
+     
+           } // search product if statement ends 
+
+    
+        }  // brand if statement ends
+  
+      } // category if statement ends
+
+  } // product_id if sattement ends
+
+} // function ends
+
+
+
+// get user ip address
+
+
+function getIpAddress()
+{
+    $ipAddress = '';
+    if (! empty($_SERVER['HTTP_CLIENT_IP'])) {
+        // to get shared ISP IP address
+        $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
+    } else if (! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        // check for IPs passing through proxy servers
+        // check if multiple IP addresses are set and take the first one
+        $ipAddressList = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        foreach ($ipAddressList as $ip) {
+            if (! empty($ip)) {
+                // if you prefer, you can check for valid IP address here
+                $ipAddress = $ip;
+                break;
+            }
+        }
+    } else if (! empty($_SERVER['HTTP_X_FORWARDED'])) {
+        $ipAddress = $_SERVER['HTTP_X_FORWARDED'];
+    } else if (! empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+        $ipAddress = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+    } else if (! empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+        $ipAddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    } else if (! empty($_SERVER['HTTP_FORWARDED'])) {
+        $ipAddress = $_SERVER['HTTP_FORWARDED'];
+    } else if (! empty($_SERVER['REMOTE_ADDR'])) {
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ipAddress;
+}
+
+
+
+//cart function
+
+function cart(){
+  if (isset($_GET['add_to_cart'])) {
+     global $con;
+      $ipAddress = getIpAddress();
+
+      $get_product_id = $_GET['add_to_cart'];
+
+      $dql = "SELECT * FROM cart_details WHERE ip_address  = $ipAddress AND product_id = $get_product_id";
+      $result = mysqli_query($con, $sql);
+
+      $num_of_rows = mysqli_num_rows($result);
+
+      if ($num_of_rows > 0) {
+          echo "<script> alert('This item is already present in to cart')</script>";
+      }
+  }
+}
 
 
 

@@ -82,28 +82,33 @@ require 'function/functions.php';
 
 <div class="container-fluid">
 
-<div class="row mb-2">
+<div class="row px-1">
 <div class="col-md-10">
 
     <!-- products row -->
     <div class='row'>
-        <?php
 
-        //displaying general products randomly limited to 2 products
-        getProducts();
+    <!-- content to display inside row from functions -->
+        <?php
+        
+        //view more details of a product
+          view_details();
 
         //displaying a particular category products randomly
-         get_unique_categories();
+          get_unique_categories();
 
         //displaying a particular brand products randomly
-         get_unique_brands();
+          get_unique_brands();
 
-         //search result
-         search_product();
+        //search result
+          search_product();
 
         ?>
+    <!-- content to display inside row from functions -->
+
+    </div>
      <!-- products row ends -->
-  </div>
+
 </div>
 
 
@@ -139,6 +144,9 @@ require 'function/functions.php';
 </div>
 
 
+
+
+
 <!-- include footer -->
 <?php include 'includes/footer.php'; ?>
 
@@ -146,4 +154,5 @@ require 'function/functions.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
+
 

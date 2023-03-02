@@ -17,11 +17,7 @@
     width: 100px;
     object-fit: fit;
     }
-    .footer{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
+
 </style>
 <body>
      <!-- navbar -->
