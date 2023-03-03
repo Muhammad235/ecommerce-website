@@ -72,6 +72,38 @@ require 'function/functions.php';
 </div>
 
 
+<div class="container">
+    <div class="row">
+        <table class="table table-boarderd text-center">
+          <thead>
+            <tr>
+            <th>Product Title</th>
+            <th>Product Image</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Remove</th>
+            <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shirt</td>
+              <td><img src="" alt=""></td>
+              <td><input type="text" name="" id=""></td>
+              <td>9000</td>
+              <td><input type="checkbox"></td>
+              <td>
+              <p>Update</p>
+              <p>Remove</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+
+
+
 
 
 <!-- include footer -->
