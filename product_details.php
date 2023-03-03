@@ -4,8 +4,6 @@ require 'includes/connect.php';
 
 require 'function/functions.php';
 
-//require 'search_product.php';
-
 
 ?>
 <!DOCTYPE html>
@@ -46,10 +44,10 @@ require 'function/functions.php';
           <a class="nav-link" href="#">Contct</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-sharp fa-solid fa-cart-shopping"></i> <sup>1</sup> </a>
+          <a class="nav-link" href="#"><i class="fa-sharp fa-solid fa-cart-shopping"></i> <sup><?php count_cart_items(); ?></sup> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Total price: 100</a>
+            <a class="nav-link" href="#">Total price: <?php total_cart_price(); ?>/-</a>
         </li>
       </ul>
       <form class="d-flex" role="search" method="GET" action="">
@@ -60,6 +58,9 @@ require 'function/functions.php';
     </div>
   </div>
 </nav>
+
+<!-- calling cart function -->
+<?php cart(); ?>
 
 <!-- second nav -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">

@@ -38,12 +38,13 @@ function getProducts(){
                   <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description.</p>
+                    <p class='card-text'>Price: $product_price/-</p>
                     <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
                     <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
                     </div>
                 </div>
                 </div> 
-                     
+                
               ";
             
             }
@@ -93,7 +94,8 @@ if (!isset($_GET['category'])) {
               <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_description.</p>
-                <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                    <p class='card-text'>Price: $product_price/-</p>
+                    <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
               </div>
             </div>
@@ -149,6 +151,7 @@ function get_unique_categories(){
                   <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description.</p>
+                    <p class='card-text'>Price: $product_price/-</p>
                     <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
                     <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a> 
                   </div>
@@ -204,6 +207,7 @@ function get_unique_brands(){
                   <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description.</p>
+                    <p class='card-text'>Price: $product_price/-</p>
                     <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
                     <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>                   
                   </div>
@@ -305,7 +309,8 @@ function search_product(){
                 <div class='card-body'>
                   <h5 class='card-title'>$product_title</h5>
                   <p class='card-text'>$product_description.</p>
-                  <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                    <p class='card-text'>Price: $product_price/-</p>
+                    <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
                   <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
                 </div>
               </div>
@@ -321,6 +326,7 @@ function search_product(){
 }
 
 
+
 //view more details
 
 function view_details(){
@@ -333,11 +339,10 @@ function view_details(){
         if (!isset($_GET['brand'])) {
            if (!isset($_GET['search_product'])) {
 
-
           $product_id = $_GET['product_id'];
           
       
-           $sql = "SELECT * FROM products WHERE product_id = $product_id";
+           $sql = "SELECT * FROM products WHERE product_id = '$product_id'";
            $result = mysqli_query($con, $sql);
         
           while ($row = mysqli_fetch_assoc($result)) {
@@ -360,7 +365,8 @@ function view_details(){
                       <div class='card-body'>
                          <h5 class='card-title'>$product_title</h5>
                           <p class='card-text'>$product_description.</p>
-                          <a href='?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+                          <p class='card-text'>Price: $product_price/-</p>
+                    <a href='?product_id=$product_id&add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
                           
                       </div>
                   </div>
@@ -443,19 +449,98 @@ function cart(){
 
       $get_product_id = $_GET['add_to_cart'];
 
-      $dql = "SELECT * FROM cart_details WHERE ip_address  = $ipAddress AND product_id = $get_product_id";
+      $sql = "SELECT * FROM cart_details WHERE ip_address  = '$ipAddress' AND product_id = $get_product_id";
       $result = mysqli_query($con, $sql);
 
       $num_of_rows = mysqli_num_rows($result);
 
       if ($num_of_rows > 0) {
           echo "<script> alert('This item is already present in to cart')</script>";
+      }else {
+        
+        $sql = "INSERT INTO cart_details (product_id, ip_address, quantity) VALUES ($get_product_id,'$ipAddress',0)";
+        $result = mysqli_query($con, $sql);
+
+        echo "<script> alert('product added to cart successfully')</script>";
+    
       }
   }
 }
 
 
+//function to get cart item numbers 
 
+
+function count_cart_items(){
+  if (isset($_GET['add_to_cart'])) {
+     global $con;
+      $ipAddress = getIpAddress();
+
+
+      $sql = "SELECT * FROM cart_details WHERE ip_address = '$ipAddress'";
+      $result = mysqli_query($con, $sql);
+
+      $count_cart_item = mysqli_num_rows($result);
+
+  }else {
+      global $con;
+      $ipAddress = getIpAddress();
+
+      $sql = "SELECT * FROM cart_details WHERE ip_address  = '$ipAddress'";
+      $result = mysqli_query($con, $sql);
+
+      $count_cart_item = mysqli_num_rows($result);
+    }
+
+  // global $con;
+  // $ipAddress = getIpAddress();
+
+  // $sql = "SELECT * FROM cart_details WHERE ip_address  = '$ipAddress'";
+  // $result = mysqli_query($con, $sql);
+
+  // $count_cart_item = mysqli_num_rows($result);
+
+    echo $count_cart_item;
+}
+
+
+//total cart price 
+
+function total_cart_price(){
+  global $con;
+  // get a particular user ip address
+  $ipAddress = getIpAddress();
+
+  $total_price = 0;
+
+  //select all the products_id of the user with the ip address gotten above from cart_details
+  $sql = "SELECT * FROM cart_details WHERE ip_address  = '$ipAddress'";
+  $result = mysqli_query($con, $sql);
+
+  while ($row = mysqli_fetch_array($result)) {
+     $product_id = $row['product_id'];
+
+     //using the product_id gotten above, select all product with the id 
+     $sql = "SELECT * FROM products WHERE product_id = '$product_id'";
+     $result = mysqli_query($con, $sql);
+
+     while ($row_product_price = mysqli_fetch_array($result)) {
+ 
+      // get the price of the selected product from the products table
+      $cart_product_price = array($row_product_price['product_price']);
+
+      $product_values = array_sum($cart_product_price);
+
+      $total_price += $product_values;
+
+     }
+
+     var_dump($cart_product_price);
+  }
+  
+
+  echo $total_price;
+}
 
 
 ?>
