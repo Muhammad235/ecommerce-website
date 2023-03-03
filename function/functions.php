@@ -535,7 +535,6 @@ function total_cart_price(){
 
      }
 
-     var_dump($cart_product_price);
   }
   
 

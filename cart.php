@@ -4,7 +4,6 @@ require 'includes/connect.php';
 
 require 'function/functions.php';
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,17 +43,9 @@ require 'function/functions.php';
           <a class="nav-link" href="#">Contct</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="cart.php"><i class="fa-sharp fa-solid fa-cart-shopping"></i> <sup><?php count_cart_items(); ?></sup> </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Total price: <?php total_cart_price(); ?>/-</a>
+          <a class="nav-link" href="cart.php"><i class="fa-sharp fa-solid fa-cart-shopping"></i> <sup><?php count_cart_items(); ?></sup> </a>
         </li>
       </ul>
-      <form class="d-flex" role="search" method="GET" action="">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
-
-        <input type="submit" value="search" class="btn btn-outline-light" name="search_product">
-      </form>
     </div>
   </div>
 </nav>
@@ -81,71 +72,6 @@ require 'function/functions.php';
 </div>
 
 
-<div class="container-fluid">
-
-<div class="row px-1">
-<div class="col-md-10">
-
-    <!-- products row -->
-    <div class='row'>
-
-    <!-- content to display inside row from functions -->
-        <?php
-        
-        //view more details of a product
-          view_details();
-
-        //displaying a particular category products randomly
-          get_unique_categories();
-
-        //displaying a particular brand products randomly
-          get_unique_brands();
-
-        //search result
-          search_product();
-
-        ?>
-    <!-- content to display inside row from functions -->
-
-    </div>
-     <!-- products row ends -->
-
-</div>
-
-
-  <div class="col-md-2 bg-secondary p-0">
-    <!-- brands to be displayed -->
-    <ul class="navbar-nav me-auto text-center">
-      <li class="nav-item bg-info">
-        <a href="#" class="nav-link text-light"> <h4> Delivery brands</h4></a>
-      </li>
-      <?php
-
-        getBrands();
-
-      ?>
-     
-    </ul>
-
-    <!-- categories to be displayed -->
-    <ul class="navbar-nav me-auto text-center">
-      <li class="nav-item bg-info">
-        <a href="#" class="nav-link text-light"> <h4> Categories</h4></a>
-      </li>
-     
-      <?php
-
-        getCategories();
-
-      ?>
-    </ul>
-
-  </div>
-</div>
-</div>
-
-
-
 
 
 <!-- include footer -->
@@ -155,5 +81,4 @@ require 'function/functions.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
-
 
