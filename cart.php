@@ -99,6 +99,12 @@ require 'function/functions.php';
             </tr>
           </tbody>
         </table>
+        <!-- subtotal -->
+        <div class="d-flex">
+          <h4 class="px-3">Subtotal: <strong class="text-info">5000/-</strong> </h4>
+          <a href="index.php"><button class="bg-info border-0 px-3 py-2 mx-3">Continue Shopping</button></a>
+          <a href="#"><button class="bg-secondary p-3 py-2 border-0"> Checkout</button></a>
+        </div>
     </div>
 </div>
 

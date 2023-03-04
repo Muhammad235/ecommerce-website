@@ -62,7 +62,7 @@ require 'function/functions.php';
 </nav>
 
 <!-- calling cart function -->
-<?php cart(); require ''; ?>
+<?php cart(); ?>
 
 <!-- second nav -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
