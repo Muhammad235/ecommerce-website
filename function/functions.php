@@ -266,8 +266,6 @@ function getCategories(){
         ";
       }
 
-    }else {
-      die(mysqli_query_error());
     }
 }
 

@@ -74,7 +74,7 @@ require 'function/functions.php';
 
 <div class="container">
     <div class="row">
-        <table class="table table-boarderd text-center">
+        <table class="table table-bordered text-center">
           <thead>
             <tr>
             <th>Product Title</th>
@@ -82,28 +82,72 @@ require 'function/functions.php';
             <th>Quantity</th>
             <th>Total Price</th>
             <th>Remove</th>
-            <th>Operations</th>
+            <th colspan="2">Operations</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Shirt</td>
-              <td><img src="" alt=""></td>
-              <td><input type="text" name="" id=""></td>
-              <td>9000</td>
-              <td><input type="checkbox"></td>
-              <td>
-              <p>Update</p>
-              <p>Remove</p>
-              </td>
-            </tr>
+            <!-- php code to display cart products -->
+            <?php 
+
+              global $con;
+              // get a particular user ip address
+              $ipAddress = getIpAddress();
+
+              $total_price = 0;
+
+              //select all the products_id of the user with the ip address gotten above from cart_details
+              $sql = "SELECT * FROM cart_details WHERE ip_address  = '$ipAddress'";
+              $result = mysqli_query($con, $sql);
+
+              while ($row = mysqli_fetch_array($result)) {
+                $product_id = $row['product_id'];
+
+                //using the product_id gotten above, select all product with the id 
+                $sql = "SELECT * FROM products WHERE product_id = '$product_id'";
+                $result = mysqli_query($con, $sql);
+
+                while ($row_product_price = mysqli_fetch_assoc($result)) {
+
+                  $product_price = $row_product_price['product_price'];
+                  $product_title = $row_product_price['product_title'];
+                  //$product_image = $row_product_price['product_image'];
+
+                  // get the price of the selected product from the products table
+                  $cart_product_price = array($row_product_price['product_price']);
+
+                  $product_values = array_sum($cart_product_price);
+
+                  $total_price += $product_values;
+
+                  echo " 
+                  
+                  <tr>
+                  <td>Shirt</td>
+                  <td><img src='admin/product_images/image 1.png' alt='cart image' width='100'></td>
+                  <td><input type='text' name='' id=''></td>
+                  <td>9000</td>
+                  <td><input type='checkbox'></td>
+                  <td>
+                   <button class='bg-info p-3 py-2 border-0 text-light'>$product_title</button>
+                   <button class='bg-info p-3 py-2 border-0 text-light'>Remove</button>
+                  </td>
+                </tr>
+                  
+                  ";
+
+                }
+              }
+            
+            
+            ?>
+          
           </tbody>
         </table>
         <!-- subtotal -->
-        <div class="d-flex">
+        <div class="d-flex mb-5">
           <h4 class="px-3">Subtotal: <strong class="text-info">5000/-</strong> </h4>
           <a href="index.php"><button class="bg-info border-0 px-3 py-2 mx-3">Continue Shopping</button></a>
-          <a href="#"><button class="bg-secondary p-3 py-2 border-0"> Checkout</button></a>
+          <a href="#"><button class="bg-secondary p-3 py-2 border-0 text-light"> Checkout</button></a>
         </div>
     </div>
 </div>
