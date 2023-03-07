@@ -80,7 +80,7 @@
 
 
 <!-- include footer -->
-<?php include 'includes/footer.php'; ?>
+<?php include_once '../includes/footer.php'; ?>
 
     
     <!-- bootstrap js link -->
