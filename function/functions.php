@@ -505,6 +505,7 @@ function count_cart_items(){
 //total cart price 
 
 function total_cart_price(){
+
   global $con;
   // get a particular user ip address
   $ipAddress = getIpAddress();
@@ -520,9 +521,9 @@ function total_cart_price(){
 
      //using the product_id gotten above, select all product with the id 
      $sql = "SELECT * FROM products WHERE product_id = '$product_id'";
-     $result = mysqli_query($con, $sql);
+     $product_result = mysqli_query($con, $sql);
 
-     while ($row_product_price = mysqli_fetch_array($result)) {
+     while ($row_product_price = mysqli_fetch_array($product_result)) {
  
       // get the price of the selected product from the products table
       $cart_product_price = array($row_product_price['product_price']);

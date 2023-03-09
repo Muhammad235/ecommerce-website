@@ -43,7 +43,7 @@ require 'function/functions.php';
           <a class="nav-link" href="#">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contct</a>
+          <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="cart.php"><i class="fa-sharp fa-solid fa-cart-shopping"></i> <sup><?php count_cart_items(); ?></sup> </a>

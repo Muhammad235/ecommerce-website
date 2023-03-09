@@ -18,6 +18,13 @@ require 'function/functions.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  .cart image{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+</style>
 <body>
     <!-- navbar -->
     <div class="container-fluid p-0">
@@ -40,7 +47,7 @@ require 'function/functions.php';
           <a class="nav-link" href="#">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contct</a>
+          <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.php"><i class="fa-sharp fa-solid fa-cart-shopping"></i> <sup><?php count_cart_items(); ?></sup> </a>
@@ -85,11 +92,11 @@ require 'function/functions.php';
             <th colspan="2">Operations</th>
             </tr>
           </thead>
+          <form action="" method='POST'>
           <tbody>
             <!-- php code to display cart products -->
             <?php 
 
-              global $con;
               // get a particular user ip address
               $ipAddress = getIpAddress();
 
@@ -104,54 +111,68 @@ require 'function/functions.php';
 
                 //using the product_id gotten above, select all product with the id 
                 $sql = "SELECT * FROM products WHERE product_id = '$product_id'";
-                $result = mysqli_query($con, $sql);
+                $product_result = mysqli_query($con, $sql);
 
-                while ($row_product_price = mysqli_fetch_assoc($result)) {
+                while ($row_cart_product = mysqli_fetch_array($product_result)) {
 
-                  $product_price = $row_product_price['product_price'];
-                  $product_title = $row_product_price['product_title'];
-                  //$product_image = $row_product_price['product_image'];
+                  $product_price = $row_cart_product['product_price'];
+                  $product_title = $row_cart_product['product_title'];
+                  $product_image = $row_cart_product['product_image1'];
 
                   // get the price of the selected product from the products table
-                  $cart_product_price = array($row_product_price['product_price']);
+                  $cart_product_price = array($row_cart_product['product_price']);
 
                   $product_values = array_sum($cart_product_price);
 
                   $total_price += $product_values;
 
-                  echo " 
                   
-                  <tr>
-                  <td>Shirt</td>
-                  <td><img src='admin/product_images/image 1.png' alt='cart image' width='100'></td>
-                  <td><input type='text' name='' id=''></td>
-                  <td>9000</td>
-                  <td><input type='checkbox'></td>
-                  <td>
-                   <button class='bg-info p-3 py-2 border-0 text-light'>$product_title</button>
-                   <button class='bg-info p-3 py-2 border-0 text-light'>Remove</button>
-                  </td>
-                </tr>
-                  
-                  ";
+                 ?>
 
-                }
-              }
-            
-            
-            ?>
+                  <tr>
+                    <td><?php echo $product_title?></td>
+                    <td><img src='admin/product_images/<?= $product_image?>' class='cart image' width='100'></td>
+                    <td><input type='text' id='' class='form-input w-50' name='quantity'></td>
+                    <?php
+
+                       // get a particular user ip address
+                        $ipAddress = getIpAddress();
+
+                      if (isset($_POST['update_cart'])) {
+                            $product_quantity = $_POST['quantity'];
+
+                            $update_cart_quantity = "UPDATE cart_details set quantity=$product_quantity WHERE ip_address= '$ipAddress'";
+                            $quantity_result = mysqli_query($con, $update_cart_quantity);
+
+                            $total_price = $total_price * $product_quantity;
+
+                      }
+
+
+
+                    ?>
+                    <td><?= $product_price?> </td>
+                    <td><input type='checkbox'></td>
+                    <td>
+                    <button class='bg-info p-3 py-2 border-0 text-light' name='update_cart'>Update</button>
+                    <button class='bg-info p-3 py-2 border-0 text-light'>Remove</button>
+                    </td>
+                  </tr>
+             
+      <!-- end while loop -->
+     <?php }}  ?>
           
           </tbody>
         </table>
         <!-- subtotal -->
         <div class="d-flex mb-5">
-          <h4 class="px-3">Subtotal: <strong class="text-info">5000/-</strong> </h4>
+          <h4 class="px-3">Subtotal: <strong class="text-info"><?=$total_price ?>/-</strong> </h4>
           <a href="index.php"><button class="bg-info border-0 px-3 py-2 mx-3">Continue Shopping</button></a>
           <a href="#"><button class="bg-secondary p-3 py-2 border-0 text-light"> Checkout</button></a>
         </div>
     </div>
 </div>
-
+</form>
 
 
 
