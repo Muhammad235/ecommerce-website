@@ -216,16 +216,15 @@ require 'function/functions.php';
                 echo "
                 
                 <h4 class='px-3'>Subtotal: <strong class='text-info'>$total_price/-</strong> </h4>
-                <a href='index.php'><button class='bg-info border-0 px-3 py-2 mx-3'>Continue Shopping</button></a>
-                <a href='#'><button class='bg-secondary p-3 py-2 border-0 text-ligh'> Checkout</button></a>
+                <button class='bg-info border-0 px-3 py-2 mx-3'><a href='index.php'class='text-light text-decoration-none'> Continue Shopping </a></button>
+                <button class='bg-secondary p-3 py-2 border-0 text-ligh'><a href='checkout.php' class='text-light text-decoration-none'>Checkout </a></button>
                 
                 
                 ";
 
               }else {
                 echo "
-                <a href='index.php'><button class='bg-info border-0 px-3 py-2 mx-3'>Continue Shopping</button></a>
-                
+                    <button class='bg-info border-0 px-3 py-2 mx-3'><a href='index.php'class='text-light text-decoration-none'> Continue Shopping </a></button>
                 ";
               }
 

@@ -49,7 +49,7 @@
                     </div>
                     <div class="button text-center">
                         <button class="my-3"><a href="insert_product.php" class="nav-link text-light bg-info my-1 p-2">Insert Products</a></button>
-                        <button><a href="" class="nav-link text-light bg-info my-1 p-2">View Products</a></button>
+                        <button><a href="index.php?view_products" class="nav-link text-light bg-info my-1 p-2">View Products</a></button>
                         <button><a href="index.php?insert_category" class="nav-link text-light bg-info my-1 p-2">Insert Categories</a></button>
                         <button><a href="" class="nav-link text-light bg-info my-1 p-2">View Categories</a></button>
                         <button><a href="index.php?insert_brands" class="nav-link text-light bg-info my-1 p-2">Insert Brands</a></button>
@@ -71,6 +71,8 @@
                 include 'insert_categories.php';
               }elseif(isset($_GET['insert_brands'])) {
                 include 'insert_brands.php';
+              }elseif(isset($_GET['view_products'])) {
+                include 'view_products.php';
               }
             
             ?>
@@ -79,6 +81,10 @@
 
 
 
+
+
+
+        
 <!-- include footer -->
 <?php include_once '../includes/footer.php'; ?>
 

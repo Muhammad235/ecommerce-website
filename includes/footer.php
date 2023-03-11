@@ -1,10 +1,11 @@
-<style>
+<!-- <style>
       .footer{
-        position: absolute;
+        position: fixed;
         bottom: 0;
         width: 100%;
+        
     }
-</style>
+</style> -->
 
 
 <!-- footer -->
