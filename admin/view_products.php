@@ -27,7 +27,7 @@ include '../includes/connect.php';
         $result = mysqli_query($con, $get_product);
 
         $number = 0; 
-        
+
         while ($row = mysqli_fetch_assoc($result)) {
 
             $product_id = $row['product_id'];
@@ -51,7 +51,7 @@ include '../includes/connect.php';
             <td><?= $product_price ?></td>
             <td>0</td>
             <td><?= $product_status ?></td>
-            <td><a href="" class='text-light'><i class="fa-solid fa-pen-to-square"></i></a></td>
+            <td><a href='index.php?edit_products&product_id=<?=$product_id?>' class='text-light'><i class="fa-solid fa-pen-to-square"></i></a></td>
             <td><a href="" class='text-light'><i class="fa-solid fa-trash"></i></a></td>
         </tr>
 

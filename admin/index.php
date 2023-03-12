@@ -73,6 +73,8 @@
                 include 'insert_brands.php';
               }elseif(isset($_GET['view_products'])) {
                 include 'view_products.php';
+              }elseif(isset($_GET['edit_products'])) {
+                include 'edit_products.php';
               }
             
             ?>
@@ -84,7 +86,7 @@
 
 
 
-        
+
 <!-- include footer -->
 <?php include_once '../includes/footer.php'; ?>
 
