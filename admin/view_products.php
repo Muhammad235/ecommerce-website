@@ -51,8 +51,8 @@ include '../includes/connect.php';
             <td><?= $product_price ?></td>
             <td>0</td>
             <td><?= $product_status ?></td>
-            <td><a href='index.php?edit_products&product_id=<?=$product_id?>' class='text-light'><i class="fa-solid fa-pen-to-square"></i></a></td>
-            <td><a href="" class='text-light'><i class="fa-solid fa-trash"></i></a></td>
+            <td><a href='index.php?edit_products&product_id=<?=$product_id?>&brand_id=<?= $brand_id ?>' class='text-light'><i class="fa-solid fa-pen-to-square"></i></a></td>
+            <td><a href="index.php?delete_product=<?=$product_id?>" class='text-light'><i class="fa-solid fa-trash"></i></a></td>
         </tr>
 
         <?php } ?>
